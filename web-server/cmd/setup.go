@@ -53,7 +53,7 @@ func createTables() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	_, err = db.Exec("CREATE TABLE tasks ( id VARCHAR(255), title VARCHAR(255), description TEXT, deadline TIMESTAMP, finished_at TIMESTAMP )")
+	_, err = db.Exec("CREATE TABLE tasks ( id VARCHAR(255), project_id VARCHAR(255), title VARCHAR(255), description TEXT, deadline VARCHAR(255), finished_at VARCHAR(255))")
 	if err != nil {
 		log.Fatal(err)
 	}
