@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+  labels:
+    app: webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+        - name: webserver
+          image: <image tag>
+          readinessProbe:
+            httpGet:
+              path: /apis/healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          envFrom:
+            - secretRef: 
+                name: postgres-secret
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql
+spec:
+  replicas: 1
+  serviceName: postgresql-service
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      containers:
+        - image: postgres:14.1
+          name: postgresql
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+          env:
+            - name: PGDATA
+              value: /data/pgdata
+          ports:
+            - containerPort: 5432
+              name: postgresql
+          volumeMounts:
+            - name: datastore
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+  volumeClaimTemplates:
+  - metadata:
+      name: datastore
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 1Gi
