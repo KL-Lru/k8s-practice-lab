@@ -18,11 +18,11 @@ func init() {
 	user := os.Getenv("POSTGRES_USER")
 	password := os.Getenv("POSTGRES_PASSWORD")
 	host := os.Getenv("POSTGRES_DB_HOST")
-	dbname := os.Getenv("POSTGRES_DB_NAME")
+	dbname := os.Getenv("POSTGRES_DATABASE")
 
 	Db, err = sql.Open(
 		"postgres",
-		fmt.Sprintf("user=%s password=%s host=%s dbname=%s", user, password, host, dbname),
+		fmt.Sprintf("user=%s password=%s host=%s dbname=%s sslmode=disable", user, password, host, dbname),
 	)
 	if err != nil {
 		panic(err)

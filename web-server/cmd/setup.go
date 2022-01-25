@@ -16,12 +16,12 @@ func conninfo(nodb bool) string {
 	user := os.Getenv("POSTGRES_USER")
 	password := os.Getenv("POSTGRES_PASSWORD")
 	host := os.Getenv("POSTGRES_DB_HOST")
-	dbname := os.Getenv("POSTGRES_DB_NAME")
+	dbname := os.Getenv("POSTGRES_DATABASE")
 
 	if nodb {
-		return fmt.Sprintf("user=%s password=%s host=%s", user, password, host)
+		return fmt.Sprintf("user=%s password=%s host=%s sslmode=disable", user, password, host)
 	}
-	return fmt.Sprintf("user=%s password=%s host=%s dbname=%s", user, password, host, dbname)
+	return fmt.Sprintf("user=%s password=%s host=%s dbname=%s sslmode=disable", user, password, host, dbname)
 }
 
 func createDatabase() {
