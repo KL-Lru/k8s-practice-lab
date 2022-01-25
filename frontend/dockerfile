@@ -1,8 +1,7 @@
 FROM node:fermium-buster as node_builder
 WORKDIR /var/src
 
-ARG API_ROOT
-ENV MODE=production
+ARG REACT_APP_API_ROOT
 
 COPY package.json .
 COPY yarn.lock .
@@ -13,7 +12,7 @@ COPY .eslintrc.yml .
 COPY public/ ./public
 COPY src/ ./src
 
-RUN  yarn build
+RUN yarn build
 
 FROM nginx:1.20
 
