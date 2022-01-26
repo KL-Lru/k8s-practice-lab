@@ -81,6 +81,11 @@ kubectl config get-contexts
 kubectl config use-context <対象とするクラスタ>
 ```
 
+作業するNamespaceが限定されている場合には次のコマンドでデフォルトのnamespaceを切り替える事ができます.
+```
+kubectl config set-context $(kubectl config current-context) --namespace=<指定のnamespace>
+```
+
 ### psql CLI (optional)
 
 PostgreSQLへの接続に使用しますが, 特にDBの内部は気にせず, 構築だけ行う場合は特に必要ありません.
@@ -216,12 +221,6 @@ docker build . -f setup.dockerfile -t gcr.io/{{project-id}}/<適当なImage名>:
 ```
 ここで指定したイメージタグは, 今後`<setup image tag>`と記述します.
 なお, gcr.io/{{project-id}}は, {{project-id}}管理下のContainer Registoryのホストを指します. 指定を誤らない用ご注意ください.
-
-手元にて動作させてみたい場合には, Container Build 1の手順で行ったのと同様にPostgreSQLのコンテナを起動し, ユーザ名, パスワード, ホスト等を`.env`内に設定の上, コンテナを起動してください.
-
-```bash
-docker run -it --env-file=.env <setup image tag>
-```
 
 問題ない場合にはimageをpushします
 
