@@ -70,9 +70,15 @@ gcloudコマンドが正常に設定されている状態であれば, 次のコ
 gcloud container clusters get-credentials <対象とするクラスタ>
 ```
 
-既にクラスタの認証情報を取得済みの場合は, 次のコマンドで一覧の確認, 現在利用
+
+既にクラスタの認証情報を取得済みの場合は, 次のコマンドで一覧の確認, 利用する認証情報の切り替えが行えます.
 
 ```
+kubectl config get-contexts
+```
+
+```
+kubectl config use-context <対象とするクラスタ>
 ```
 
 ### psql CLI (optional)
