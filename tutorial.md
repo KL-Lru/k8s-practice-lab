@@ -413,8 +413,10 @@ kubectl apply -f ingress.yml
 該当のIPアドレスにアクセスすると, サービスを利用することが出来るようになります.
 
 ```
-kubectl get ingress
+kubectl get ingress -w
 ```
+
+IPが払い出された後でも404が表示される等, 設定反映が完了に時間を要する場合もありますのでご留意ください.
 
 ## お疲れさまでした
 
